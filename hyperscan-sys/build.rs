@@ -92,7 +92,6 @@ fn main() {
 
     for lib in libhs.libs {
         if lib.contains("hs") {
-            println!("cargo:rustc-link-lib=dylib={}", lib);
             println!("cargo:rustc-link-lib=static={}", lib);
         }
     }
