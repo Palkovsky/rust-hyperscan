@@ -30,7 +30,7 @@ fn find_hyperscan() -> Library {
         link_paths,
         include_paths,
         ..
-    }) = pkg_config::Config::new().statik(true).probe("libhs")
+    }) = pkg_config::Config::new().statik(true).cargo_metadata(false).probe("libhs")
     {
         debug!(
             "building with Hyperscan @ libs={:?}, link_paths={:?}, include_paths={:?}",
@@ -99,8 +99,11 @@ fn main() {
     if cfg!(any(target_os = "macos", target_os = "freebsd")) {
         println!("cargo:rustc-link-lib=dylib=c++");
     } else if cfg!(not(target_os = "windows")) {
-        //println!("cargo:rustc-link-lib=dylib=stdc++");
-        //println!("cargo:rustc-link-lib=dylib=gcc");
+        println!("cargo:rustc-link-lib=static-nobundle=stdc++");
+        println!("cargo:rustc-link-lib=static-nobundle=c");
+        println!("cargo:rustc-link-lib=static-nobundle=m");
+        println!("cargo:rustc-link-lib=static-nobundle=ssp_nonshared");
+        println!("cargo:rustc-link-lib=static-nobundle=gcc");
     }
 
     for link_path in libhs.link_paths {
