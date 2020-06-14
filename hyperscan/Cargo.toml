@@ -10,6 +10,9 @@ license = "Apache-2.0"
 readme = "../README.md"
 keywords = ["regex", "hyperscan", "streaming"]
 
+[features]
+gen = [ "hyperscan-sys/gen" ]
+
 [dependencies]
 libc = "0.2"
 log = "0.4"
