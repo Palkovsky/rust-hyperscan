@@ -498,6 +498,11 @@ fn bindgen_test_layout_hs_compile_error() {
         )
     );
 }
+impl Default for hs_compile_error {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
 pub type hs_compile_error_t = hs_compile_error;
 #[doc = " A type containing information on the target platform which may optionally be"]
 #[doc = " provided to the compile calls (@ref hs_compile(), @ref hs_compile_multi(),"]
@@ -506,7 +511,7 @@ pub type hs_compile_error_t = hs_compile_error;
 #[doc = " A hs_platform_info structure may be populated for the current platform by"]
 #[doc = " using the @ref hs_populate_platform() call."]
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Default, Copy, Clone)]
 pub struct hs_platform_info {
     #[doc = " Information about the target platform which may be used to guide the"]
     #[doc = " optimisation process of the compile."]
@@ -583,7 +588,7 @@ pub type hs_platform_info_t = hs_platform_info;
 #[doc = " A type containing information related to an expression that is returned by"]
 #[doc = " @ref hs_expression_info() or @ref hs_expression_ext_info."]
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Default, Copy, Clone)]
 pub struct hs_expr_info {
     #[doc = " The minimum length in bytes of a match for the pattern."]
     #[doc = ""]
@@ -690,7 +695,7 @@ pub type hs_expr_info_t = hs_expr_info;
 #[doc = " constrained at compile time, rather than relying on the application to"]
 #[doc = " process unwanted matches at runtime."]
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Default, Copy, Clone)]
 pub struct hs_expr_ext {
     #[doc = " Flags governing which parts of this structure are to be used by the"]
     #[doc = " compiler. See @ref HS_EXT_FLAG."]
