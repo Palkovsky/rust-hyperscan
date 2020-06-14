@@ -56,6 +56,7 @@ fn generate_binding(hyperscan_include_path: &str, out_file: &Path) {
         .clang_arg("-xc++")
         .clang_arg("-std=c++11")
         .whitelist_function("^hs_.*")
+        .derive_default(true)
         .generate()
         .expect("Fail to generate bindings")
         .write_to_file(out_file)

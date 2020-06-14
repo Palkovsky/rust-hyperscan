@@ -186,6 +186,7 @@ impl PlatformInfo {
             cpu_features,
             reserved1: 0,
             reserved2: 0,
+            ..Default::default()
         })))
     }
 
