@@ -506,7 +506,7 @@ pub type hs_compile_error_t = hs_compile_error;
 /// A hs_platform_info structure may be populated for the current platform by
 /// using the @ref hs_populate_platform() call.
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Default, Copy, Clone)]
 pub struct hs_platform_info {
     /// Information about the target platform which may be used to guide the
     /// optimisation process of the compile.
