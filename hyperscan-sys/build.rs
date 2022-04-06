@@ -71,10 +71,11 @@ fn generate_binding(_: &str, out_file: &Path) {
     let target_arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap();
 
     let bindings = match (target_os.as_str(), target_arch.as_str()) {
-        ("macos"  , "x86_64") => "src/macos/raw.rs",
-        ("linux"  , "x86_64") => "src/linux/raw.rs",
-        ("windows", "x86_64") => "src/windows/raw.rs",
-        ("windows", "x86"   ) => "src/windows/raw_32.rs",
+        ("macos"  , "x86_64")  => "src/macos/raw.rs",
+        ("linux"  , "x86_64")  => "src/linux/raw.rs",
+        ("linux"  , "aarch64") => "src/linux/raw_aarch64.rs",
+        ("windows", "x86_64")  => "src/windows/raw.rs",
+        ("windows", "x86"   )  => "src/windows/raw_32.rs",
         _ => panic!(
                 "target `{}` haven't binding file, generate it with `cargo build --features gen`",
                 env::var("TARGET").unwrap()

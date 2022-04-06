@@ -117,7 +117,7 @@ pub trait SerializedDatabase {
 
         unsafe {
             check_hs_error!(hs_serialized_database_size(
-                self.as_slice().as_ptr() as *const i8,
+                self.as_slice().as_ptr() as *const c_char,
                 self.len(),
                 &mut size
             ));
@@ -131,7 +131,7 @@ pub trait SerializedDatabase {
 
         unsafe {
             check_hs_error!(hs_serialized_database_info(
-                self.as_slice().as_ptr() as *const i8,
+                self.as_slice().as_ptr() as *const c_char,
                 self.len(),
                 &mut p
             ));

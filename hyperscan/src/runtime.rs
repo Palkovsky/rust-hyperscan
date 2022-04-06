@@ -1,7 +1,7 @@
 use std::fmt;
 use std::mem;
 use std::ops::{Deref, DerefMut};
-use std::os::raw::c_uint;
+use std::os::raw::{c_char, c_uint};
 use std::ptr;
 
 use api::*;
@@ -140,7 +140,7 @@ impl<T: Scannable, S: Scratch> BlockScanner<T, S> for BlockDatabase {
 
             check_hs_error!(hs_scan(
                 **self,
-                bytes.as_ptr() as *const i8,
+                bytes.as_ptr() as *const c_char,
                 bytes.len() as u32,
                 flags as u32,
                 **scratch,
@@ -182,7 +182,7 @@ impl<T: Scannable, S: Scratch> VectoredScanner<T, S> for VectoredDatabase {
         unsafe {
             check_hs_error!(hs_scan_vector(
                 **self,
-                ptrs.as_slice().as_ptr() as *const *const i8,
+                ptrs.as_slice().as_ptr() as *const *const c_char,
                 lens.as_slice().as_ptr() as *const c_uint,
                 data.len() as u32,
                 flags as u32,
@@ -321,7 +321,7 @@ impl<T: Scannable, S: Scratch> BlockScanner<T, S> for RawStream {
         unsafe {
             check_hs_error!(hs_scan_stream(
                 self.0,
-                bytes.as_ptr() as *const i8,
+                bytes.as_ptr() as *const c_char,
                 bytes.len() as u32,
                 flags as u32,
                 **scratch,
