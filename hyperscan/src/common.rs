@@ -126,7 +126,7 @@ impl<T: Type> SerializableDatabase<RawDatabase<T>, RawSerializedDatabase> for Ra
 
         unsafe {
             check_hs_error!(hs_deserialize_database(
-                bytes.as_ptr() as *const i8,
+                bytes.as_ptr() as *const c_char,
                 bytes.len(),
                 &mut db,
             ));
@@ -145,7 +145,7 @@ impl<T: Type> SerializableDatabase<RawDatabase<T>, RawSerializedDatabase> for Ra
     fn deserialize_at(&self, bytes: &[u8]) -> Result<&RawDatabase<T>, Error> {
         unsafe {
             check_hs_error!(hs_deserialize_database_at(
-                bytes.as_ptr() as *const i8,
+                bytes.as_ptr() as *const c_char,
                 bytes.len(),
                 self.db,
             ));

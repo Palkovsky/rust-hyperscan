@@ -1,7 +1,7 @@
 use std::ffi::CString;
 use std::fmt;
 use std::iter::FromIterator;
-use std::os::raw::c_uint;
+use std::os::raw::{c_char, c_uint};
 use std::ptr;
 use std::str::FromStr;
 
@@ -176,7 +176,7 @@ impl Expression for Pattern {
         unsafe {
             check_compile_error!(
                 hs_expression_info(
-                    expr.as_bytes_with_nul().as_ptr() as *const i8,
+                    expr.as_bytes_with_nul().as_ptr() as *const c_char,
                     self.flags.0,
                     &mut *info,
                     &mut err
@@ -251,7 +251,7 @@ impl<T: Type> RawDatabase<T> {
         unsafe {
             check_compile_error!(
                 hs_compile(
-                    expr.as_bytes_with_nul().as_ptr() as *const i8,
+                    expr.as_bytes_with_nul().as_ptr() as *const c_char,
                     flags,
                     T::mode(),
                     platform.as_ptr(),
@@ -319,7 +319,7 @@ impl<T: Type> DatabaseBuilder<RawDatabase<T>> for Patterns {
         unsafe {
             check_compile_error!(
                 hs_compile_multi(
-                    ptrs.as_ptr(),
+                    ptrs.as_ptr() as *const *const c_char,
                     flags.as_ptr(),
                     ids.as_ptr(),
                     self.len() as u32,
