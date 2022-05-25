@@ -101,9 +101,10 @@ fn main() {
         }
     }
 
-    if cfg!(any(target_os = "macos", target_os = "freebsd")) {
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    if target_os == "macos" || target_os == "freebsd" {
         println!("cargo:rustc-link-lib=dylib=c++");
-    } else if cfg!(not(target_os = "windows")) {
+    } else if target_os != "windows" {
         println!("cargo:rustc-link-lib=dylib=stdc++");
         println!("cargo:rustc-link-lib=dylib=gcc");
     }
