@@ -72,6 +72,7 @@ fn generate_binding(_: &str, out_file: &Path) {
 
     let bindings = match (target_os.as_str(), target_arch.as_str()) {
         ("macos"  , "x86_64")  => "src/macos/raw.rs",
+        ("macos"  , "aarch64")  => "src/macos/raw_aarch64.rs",
         ("linux"  , "x86_64")  => "src/linux/raw.rs",
         ("linux"  , "aarch64") => "src/linux/raw_aarch64.rs",
         ("windows", "x86_64")  => "src/windows/raw.rs",
